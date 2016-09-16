@@ -26,23 +26,17 @@ def talk(request):
     answer_text = ""
     # ユーザー入力をインポートテキストに追記する
     if (re.match("覚えて: ", user_input)):
-        import_text_obj.add(user_input.replace("覚えて: ", ""))
+        text = user_input.replace("覚えて: ", "")
+        import_text_obj.add(text)
+        markov_obj.add(morpheme_analyzer_obj.analyze(text))
         answer_text = "覚えたよ！"
     else:
-
-        # ユーザー入力を形態素解析してマルコフ連鎖テーブルに加える
-        user_morphemes = morpheme_analyzer_obj.analyze(user_input)
-        markov_obj.add(user_morphemes)
-
         # 定型文から回答を取得
         answer_text = fixed_phrase_obj.answer(user_input)
 
-        for um in user_morphemes:
-            print("user_morphemes : " + um)
-
         # 定型文の回答がなければマルコフ連鎖で回答
-        if answer_text == "":answer_text = markov_obj.answer(user_morphemes)
-
+        if answer_text == "":
+            answer_text = markov_obj.answer(morpheme_analyzer_obj.extract_noun(nouns))
 
     answer = {
         "answer" : answer_text,
