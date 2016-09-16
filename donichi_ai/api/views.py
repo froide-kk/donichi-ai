@@ -32,9 +32,8 @@ def talk(request):
         answer_text = "覚えたよ！"
     else:
 
-        # ユーザー入力を形態素解析してマルコフ連鎖テーブルに加える
+        # ユーザー入力を形態素解析
         user_morphemes = morpheme_analyzer_obj.analyze(user_input)
-        markov_obj.add(user_morphemes)
 
         # 定型文から回答を取得
         answer_text = fixed_phrase_obj.answer(user_input)
