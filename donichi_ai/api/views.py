@@ -38,9 +38,6 @@ def talk(request):
         # 定型文から回答を取得
         answer_text = fixed_phrase_obj.answer(user_input)
 
-        for um in user_morphemes:
-            print("user_morphemes : " + um)
-
         # 定型文の回答がなければマルコフ連鎖で回答
         if answer_text == "":answer_text = markov_obj.answer(user_morphemes)
 
