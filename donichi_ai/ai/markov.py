@@ -26,6 +26,7 @@ class Markov:
             if count > len(self.table):
                 return "質問の内容を理解できませんでした"
 
+        sentence = w1 + w2
         count = 0
         while w2 not in ["。", "！", "？", "!", "?", "."]:
             words = self.table.get((w1, w2))
