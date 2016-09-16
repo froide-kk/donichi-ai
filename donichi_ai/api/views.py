@@ -26,7 +26,9 @@ def talk(request):
     answer_text = ""
     # ユーザー入力をインポートテキストに追記する
     if (re.match("覚えて: ", user_input)):
-        import_text_obj.add(user_input.replace("覚えて: ", ""))
+        text = user_input.replace("覚えて: ", "")
+        import_text_obj.add(text)
+        markov_obj.add(morpheme_analyzer.analyze(text))
         answer_text = "覚えたよ！"
     else:
 
