@@ -28,7 +28,7 @@ def talk(request):
     if (re.match("覚えて: ", user_input)):
         text = user_input.replace("覚えて: ", "")
         import_text_obj.add(text)
-        markov_obj.add(morpheme_analyzer.analyze(text))
+        markov_obj.add(morpheme_analyzer_obj.analyze(text))
         answer_text = "覚えたよ！"
     else:
 
