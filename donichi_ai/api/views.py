@@ -31,14 +31,12 @@ def talk(request):
         markov_obj.add(morpheme_analyzer_obj.analyze(text))
         answer_text = "覚えたよ！"
     else:
-        # ユーザー入力を形態素解析
-        user_morphemes = morpheme_analyzer_obj.analyze(user_input)
-
         # 定型文から回答を取得
         answer_text = fixed_phrase_obj.answer(user_input)
 
         # 定型文の回答がなければマルコフ連鎖で回答
-        if answer_text == "":answer_text = markov_obj.answer(user_morphemes)
+        if answer_text == "":
+            answer_text = markov_obj.answer(morpheme_analyzer_obj.extract_noun(nouns))
 
     answer = {
         "answer" : answer_text,
